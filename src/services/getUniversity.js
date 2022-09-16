@@ -1,7 +1,7 @@
 const api = require('../requestApi/request');
 
-const getUniversity = async (params) => {
-  const result = await api.requestAPI(params);
+const getUniversity = async () => {
+  const result = await api.requestAPI();
   return result;
 };
 

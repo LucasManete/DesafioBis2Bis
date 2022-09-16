@@ -4,6 +4,6 @@ const controller = require('../controllers/university');
 
 const route = Router();
 
-route.get('/:country', controller.getUniversityController);
+route.get('/', controller.getUniversityController);
 
 module.exports = route;
