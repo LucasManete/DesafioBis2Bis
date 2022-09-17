@@ -12,6 +12,10 @@ async function formatUniversities(universities) {
 }
 
 const populateMongoDB = async () => {
+  const verifyBD = await model.find();
+  if (verifyBD.length > 0) {
+    return 'Banco já Populado';
+  }
   const request = await api.requestAPI();
   const formated = await formatUniversities(request);
   await model.insertMany(formated);
@@ -24,6 +28,9 @@ const getUniversityID = async (id) => {
 };
 
 const createUniversity = async (body) => {
+  const findUniversity = await model.findOne(body);
+  if (findUniversity) return 'Universidade já cadastrada';
+
   const result = await model.create(body);
   return result;
 };
