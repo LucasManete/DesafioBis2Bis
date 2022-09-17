@@ -28,4 +28,20 @@ const createUniversity = async (body) => {
   return result;
 };
 
-module.exports = { populateMongoDB, getUniversityID, createUniversity };
+const updateUniversity = async (id, body) => {
+  await model.findByIdAndUpdate(id, body);
+  return 'Dados atualizados com sucesso';
+};
+
+const deleteUniversity = async (id, body) => {
+  await model.findByIdAndDelete(id, body);
+  return 'Dados excluidos com sucesso';
+};
+
+module.exports = {
+  populateMongoDB,
+  getUniversityID,
+  createUniversity,
+  updateUniversity,
+  deleteUniversity,
+};
