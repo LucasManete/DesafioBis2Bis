@@ -21,7 +21,7 @@ const universitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  state_province: { required: null },
+  state_province: { required: false },
 });
 
 module.exports = mongoose.model('universities', universitySchema);

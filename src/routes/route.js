@@ -1,9 +1,9 @@
 const { Router } = require('express');
 
-const controller = require('../controllers/university');
+const controller = require('../controllers/populateUniversity');
 
 const route = Router();
 
-route.get('/', controller.getUniversityController);
+route.get('/populate', controller.populateDBController);
 
 module.exports = route;
