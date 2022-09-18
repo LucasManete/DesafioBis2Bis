@@ -1,10 +1,4 @@
-const services = require('../services/populateUniversity');
-
-const populateDB = async (_req, res) => {
-  const result = await services.populateMongoDB();
-
-  return res.status(200).json({ message: result });
-};
+const services = require('../services/universityService');
 
 const getAll = async (req, res) => {
   const result = await services.getAllUniversity(req.query);
@@ -36,10 +30,9 @@ const deleteUniversity = async (req, res) => {
 };
 
 module.exports = {
-  populateDB,
+  getAll,
   getUniversityID,
   createUniversity,
   updateUniversity,
   deleteUniversity,
-  getAll,
 };

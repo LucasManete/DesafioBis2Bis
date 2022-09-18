@@ -1,24 +1,5 @@
-const api = require('../requestApi/request');
+const { notFoundException, sucessDelete } = require('../HttpCatalog/httpCatalog');
 const model = require('../schemas/universitySchema');
-
-async function formatUniversities(universities) {
-  const allUniversities = [];
-
-  universities.forEach((country) => {
-    allUniversities.push(...country.data);
-  });
-
-  return allUniversities;
-}
-
-const populateMongoDB = async () => {
-  // const verifyBD = await model.find();
-  // if (verifyBD.length > 0) return 'Banco já Populado';
-  const request = await api.requestAPI();
-  const formated = await formatUniversities(request);
-  const result = await model.insertMany(formated);
-  return result.length;
-};
 
 const getAllUniversity = async (query) => {
   const { page = 1, limit = 20, country } = query;
@@ -36,7 +17,7 @@ const getAllUniversity = async (query) => {
   return result;
 };
 
-const getUniversityID = async (id) => {
+const getUniversityID = async ({ id }) => {
   const result = await model.findById(id);
   return result;
 };
@@ -54,26 +35,23 @@ const createUniversity = async (body) => {
   return result;
 };
 
-const updateUniversity = async (id, body) => {
+const updateUniversity = async ({ id }, body) => {
   await model.findByIdAndUpdate(id, body);
   return 'Dados atualizados com sucesso';
 };
 
-const notFoundException = (message) => ({ statusCode: 404, message, error: true });
-
-const deleteUniversity = async (id) => {
-  const teste = await model.findByIdAndDelete(id);
-  if (!teste) {
-    return notFoundException('aklsjdklasjdlkasjdklad');
+const deleteUniversity = async ({ id }) => {
+  const university = await model.findByIdAndDelete(id);
+  if (!university) {
+    return notFoundException('Universidade não econtrada');
   }
-  return { statusCode: 400, message: 'Facuade existe', error: true };
+  return sucessDelete('Universidade Deletada com sucesso');
 };
 
 module.exports = {
-  populateMongoDB,
+  getAllUniversity,
   getUniversityID,
   createUniversity,
   updateUniversity,
   deleteUniversity,
-  getAllUniversity,
 };
