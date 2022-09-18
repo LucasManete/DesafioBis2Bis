@@ -7,21 +7,21 @@ const getAll = async (req, res) => {
 };
 
 const getUniversityID = async (req, res) => {
-  const result = await services.getUniversityID(req.params);
+  const response = await services.getUniversityID(req.params);
 
-  return res.status(200).json(result);
+  return res.status(response.statusCode).json(response);
 };
 
 const createUniversity = async (req, res) => {
-  const result = await services.createUniversity(req.body);
+  const response = await services.createUniversity(req.body);
 
-  return res.status(201).json(result);
+  return res.status(response.statusCode).json(response);
 };
 
 const updateUniversity = async (req, res) => {
-  const result = await services.updateUniversity(req.params, req.body);
+  const response = await services.updateUniversity(req.params, req.body);
 
-  return res.status(200).json({ message: result });
+  return res.status(response.statusCode).json(response);
 };
 
 const deleteUniversity = async (req, res) => {

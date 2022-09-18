@@ -1,3 +1,5 @@
 const notFoundException = (message) => ({ statusCode: 404, message, error: true });
-const sucessDelete = (message) => ({ statusCode: 400, message, error: false });
-module.exports = { notFoundException, sucessDelete };
+const sucessException = (message) => ({ statusCode: 200, message, error: false });
+const conflictException = (message) => ({ statusCode: 409, message, error: true });
+
+module.exports = { notFoundException, sucessException, conflictException };

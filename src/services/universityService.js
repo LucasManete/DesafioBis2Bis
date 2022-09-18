@@ -1,4 +1,4 @@
-const { notFoundException, sucessDelete } = require('../HttpCatalog/httpCatalog');
+const { notFoundException, conflictException, sucessException } = require('../HttpCatalog/httpCatalog');
 const model = require('../schemas/universitySchema');
 
 const getAllUniversity = async (query) => {
@@ -19,6 +19,7 @@ const getAllUniversity = async (query) => {
 
 const getUniversityID = async ({ id }) => {
   const result = await model.findById(id);
+  if (!result) { return notFoundException('Universidade não econtrada'); }
   return result;
 };
 
@@ -29,15 +30,18 @@ const createUniversity = async (body) => {
     state_province: body.state_province,
   });
 
-  if (findUniversity) return 'Universidade já cadastrada';
+  if (findUniversity) { return conflictException('Universidade já cadastrada'); }
 
   const result = await model.create(body);
   return result;
 };
 
 const updateUniversity = async ({ id }, body) => {
-  await model.findByIdAndUpdate(id, body);
-  return 'Dados atualizados com sucesso';
+  const university = await model.findByIdAndUpdate(id, body);
+  if (!university) {
+    return notFoundException('Universidade não econtrada');
+  }
+  return sucessException('Dados atualizados com sucesso');
 };
 
 const deleteUniversity = async ({ id }) => {
@@ -45,7 +49,7 @@ const deleteUniversity = async ({ id }) => {
   if (!university) {
     return notFoundException('Universidade não econtrada');
   }
-  return sucessDelete('Universidade Deletada com sucesso');
+  return sucessException('Universidade Deletada com sucesso');
 };
 
 module.exports = {
