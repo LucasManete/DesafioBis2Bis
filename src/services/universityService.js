@@ -20,7 +20,7 @@ const getAllUniversity = async (query) => {
 const getUniversityID = async ({ id }) => {
   const result = await model.findById(id);
   if (!result) { return notFoundException('Universidade não econtrada'); }
-  return result;
+  return sucessException(result);
 };
 
 const createUniversity = async (body) => {
@@ -33,7 +33,7 @@ const createUniversity = async (body) => {
   if (findUniversity) { return conflictException('Universidade já cadastrada'); }
 
   const result = await model.create(body);
-  return result;
+  return sucessException(result);
 };
 
 const updateUniversity = async ({ id }, body) => {
