@@ -3,6 +3,12 @@ const services = require('../services/populateUniversity');
 const populateDB = async (_req, res) => {
   const result = await services.populateMongoDB();
 
+  return res.status(200).json({ message: result });
+};
+
+const getAll = async (req, res) => {
+  const result = await services.getAllUniversity(req.query);
+
   return res.status(200).json(result);
 };
 
@@ -21,12 +27,12 @@ const createUniversity = async (req, res) => {
 const updateUniversity = async (req, res) => {
   const result = await services.updateUniversity(req.params, req.body);
 
-  return res.status(204).json(result);
+  return res.status(200).json({ message: result });
 };
 
 const deleteUniversity = async (req, res) => {
-  const result = await services.deleteUniversity(req.params, req.body);
-  return res.status(204).json(result);
+  const response = await services.deleteUniversity(req.params);
+  return res.status(response.statusCode).json(response);
 };
 
 module.exports = {
@@ -35,4 +41,5 @@ module.exports = {
   createUniversity,
   updateUniversity,
   deleteUniversity,
+  getAll,
 };

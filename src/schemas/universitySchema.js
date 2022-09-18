@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const universitySchema = new mongoose.Schema({
   domains: [{
@@ -21,7 +22,13 @@ const universitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  state_province: { required: false },
+  state_province: {
+    type: String,
+    required: false,
+    alias: 'state-province',
+  },
 });
+
+universitySchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('universities', universitySchema);
