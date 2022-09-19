@@ -12,7 +12,7 @@ async function formatUniversities(universities) {
 
 const populateMongoDB = async () => {
   const verifyBD = await model.find();
-  if (verifyBD.length > 0) return 'Banco já Populado';
+  if (verifyBD.length > 60) return 'Banco já Populado';
   const request = await api.requestAPI();
   const formated = await formatUniversities(request);
   const result = await model.insertMany(formated);
