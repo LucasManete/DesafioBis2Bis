@@ -1,43 +1,44 @@
-class ApiController {
-  constructor(service) {
-    this.service = service;
-  }
+const service = require('../services/universityService');
 
-  async populate(_req, res) {
-    const result = await this.service.populateDB();
+const populate = async (_req, res) => {
+  const response = await service.populate();
 
-    return res.status(result.statusCode).json(result);
-  }
+  return res.status(response.statusCode).json(response);
+};
 
-  async getAll(req, res) {
-    const result = await this.service.getAll(req.query);
+const getAll = async (req, res) => {
+  const response = await service.getAll(req.query);
 
-    return res.status(result).json(result);
-  }
+  return res.status(response.statusCode).json(response);
+};
 
-  async getOne(req, res) {
-    const response = await this.service.getOne(req.params);
+const getOne = async (req, res) => {
+  const response = await service.getOne(req.params);
+  return res.status(response.statusCode).json(response);
+};
 
-    return res.status(response.statusCode).json(response);
-  }
+const create = async (req, res) => {
+  const response = await service.create(req.body);
 
-  async create(req, res) {
-    const response = await this.service.create(req.body);
+  return res.status(response.statusCode).json(response);
+};
 
-    return res.status(response.statusCode).json(response);
-  }
+const update = async (req, res) => {
+  const response = await service.update(req.params, req.body);
 
-  async update(req, res) {
-    const response = await this.service.update(req.params, req.body);
+  return res.status(response.statusCode).json(response);
+};
 
-    return res.status(response.statusCode).json(response);
-  }
+const destroy = async (req, res) => {
+  const response = await service.destroy(req.params);
+  return res.status(response.statusCode).json(response);
+};
 
-  async delete(req, res) {
-    const response = await this.service.delete(req.params);
-
-    return res.status(response.statusCode).json(response);
-  }
-}
-
-module.exports = ApiController;
+module.exports = {
+  getAll,
+  getOne,
+  create,
+  update,
+  destroy,
+  populate,
+};
