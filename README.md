@@ -50,8 +50,9 @@ de negócio e a lógica necessária e devolver uma resposta ao controllers.
 
 ## Começando
 
-- Rode o comando **docker-compose up -d**
-
+- 1. Rode o comando **docker-compose up -d**
+- 2. Rode o comando **docker exec -it university bash**
+- 3. Rode o comando **npm install**
 ## Outros comandos
 
 - `"dev": "nodemon ."` inicia o projeto com nodemon.
