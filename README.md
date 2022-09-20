@@ -32,12 +32,8 @@ de negócio e a lógica necessária e devolver uma resposta ao controllers.
 
 - Linguagens:
     - NodeJs
-- ORM(Object/Relational Mapper): 
-    - Sequelize
-- Autenticação:
-    - JWT
-- Configurações / variáveis de ambiente
-    - Dotenv
+- ODM(Object Data Modeling): 
+    - Mongoose
 - docker-compose:
     - image: mongo:5.0.7
     - image: Node:16.14
