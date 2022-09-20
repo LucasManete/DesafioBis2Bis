@@ -1,61 +1,71 @@
 const { notFoundException, conflictException, sucessException } = require('../HttpCatalog/httpCatalog');
-const model = require('../schemas/universitySchema');
+const api = require('../requestApi/request');
+const formatUniversities = require('../utils/formatUniversities');
 
-const getAllUniversity = async (query) => {
-  const { page = 1, limit = 20, country } = query;
-  const options = { page, limit, select: ['_id', 'name', 'country', 'state_province'] };
-  const filters = {};
-
-  if (limit > 20) {
-    options.limit = 20;
+class ApiService {
+  constructor(model) {
+    this.model = model;
   }
 
-  if (country) {
-    Object.assign(filters, { country });
+  async getAll(query) {
+    const { page = 1, limit = 20, country } = query;
+    const options = { page, limit, select: ['_id', 'name', 'country', 'state_province'] };
+    const filters = {};
+
+    if (limit > 20) {
+      options.limit = 20;
+    }
+
+    if (country) {
+      Object.assign(filters, { country });
+    }
+    const result = await this.model.paginate(filters, options);
+    return result;
   }
-  const result = await model.paginate(filters, options);
-  return result;
-};
 
-const getUniversityID = async ({ id }) => {
-  const result = await model.findById(id);
-  if (!result) { return notFoundException('Universidade não econtrada'); }
-  return sucessException(result);
-};
-
-const createUniversity = async (body) => {
-  const findUniversity = await model.findOne({
-    name: body.name,
-    country: body.country,
-    state_province: body.state_province,
-  });
-
-  if (findUniversity) { return conflictException('Universidade já cadastrada'); }
-
-  const result = await model.create(body);
-  return sucessException(result);
-};
-
-const updateUniversity = async ({ id }, body) => {
-  const university = await model.findByIdAndUpdate(id, body);
-  if (!university) {
-    return notFoundException('Universidade não econtrada');
+  async getOne({ id }) {
+    const result = await this.model.findById(id);
+    if (!result) { return notFoundException('Universidade não econtrada'); }
+    return sucessException(result);
   }
-  return sucessException('Dados atualizados com sucesso');
-};
 
-const deleteUniversity = async ({ id }) => {
-  const university = await model.findByIdAndDelete(id);
-  if (!university) {
-    return notFoundException('Universidade não econtrada');
+  async create(body) {
+    const findUniversity = await this.model.findOne({
+      name: body.name,
+      country: body.country,
+      state_province: body.state_province,
+    });
+
+    if (findUniversity) { return conflictException('Universidade já cadastrada'); }
+
+    const result = await this.schema.create(body);
+    return sucessException(result);
   }
-  return sucessException('Universidade Deletada com sucesso');
-};
 
-module.exports = {
-  getAllUniversity,
-  getUniversityID,
-  createUniversity,
-  updateUniversity,
-  deleteUniversity,
-};
+  async update({ id }, body) {
+    const university = await this.model.findByIdAndUpdate(id, body);
+    if (!university) {
+      return notFoundException('Universidade não econtrada');
+    }
+    return sucessException('Dados atualizados com sucesso');
+  }
+
+  async delete({ id }) {
+    const university = await this.model.findByIdAndDelete(id);
+    if (!university) {
+      return notFoundException('Universidade não econtrada');
+    }
+    return sucessException('Universidade Deletada com sucesso');
+  }
+
+  async populate() {
+    const verifyBD = await this.model.find();
+    if (verifyBD.length > 60) return conflictException('Banco já populado');
+    const request = await api.requestAPI();
+    const formated = await formatUniversities(request);
+    const result = await this.model.insertMany(formated);
+    return sucessException(`O banco foi polulado com ${result.length} resultados`);
+  }
+}
+
+module.exports = ApiService;

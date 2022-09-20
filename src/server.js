@@ -1,5 +1,4 @@
-// import 'dotenv/config';
-const connectToDatabase = require('./connection');
+const connectToDatabase = require('./database/connection');
 
 const app = require('./app');
 

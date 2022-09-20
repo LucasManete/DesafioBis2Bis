@@ -1,38 +1,43 @@
-const services = require('../services/universityService');
+class ApiController {
+  constructor(service) {
+    this.service = service;
+  }
 
-const getAll = async (req, res) => {
-  const result = await services.getAllUniversity(req.query);
+  async populate(_req, res) {
+    const result = await this.service.populateDB();
 
-  return res.status(200).json(result);
-};
+    return res.status(result.statusCode).json(result);
+  }
 
-const getUniversityID = async (req, res) => {
-  const response = await services.getUniversityID(req.params);
+  async getAll(req, res) {
+    const result = await this.service.getAll(req.query);
 
-  return res.status(response.statusCode).json(response);
-};
+    return res.status(result).json(result);
+  }
 
-const createUniversity = async (req, res) => {
-  const response = await services.createUniversity(req.body);
+  async getOne(req, res) {
+    const response = await this.service.getOne(req.params);
 
-  return res.status(response.statusCode).json(response);
-};
+    return res.status(response.statusCode).json(response);
+  }
 
-const updateUniversity = async (req, res) => {
-  const response = await services.updateUniversity(req.params, req.body);
+  async create(req, res) {
+    const response = await this.service.create(req.body);
 
-  return res.status(response.statusCode).json(response);
-};
+    return res.status(response.statusCode).json(response);
+  }
 
-const deleteUniversity = async (req, res) => {
-  const response = await services.deleteUniversity(req.params);
-  return res.status(response.statusCode).json(response);
-};
+  async update(req, res) {
+    const response = await this.service.update(req.params, req.body);
 
-module.exports = {
-  getAll,
-  getUniversityID,
-  createUniversity,
-  updateUniversity,
-  deleteUniversity,
-};
+    return res.status(response.statusCode).json(response);
+  }
+
+  async delete(req, res) {
+    const response = await this.service.delete(req.params);
+
+    return res.status(response.statusCode).json(response);
+  }
+}
+
+module.exports = ApiController;
