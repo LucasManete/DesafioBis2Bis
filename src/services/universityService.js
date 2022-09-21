@@ -64,7 +64,7 @@ const destroy = async ({ id }) => {
 
 const populate = async () => {
   const verifyBD = await model.find();
-  if (verifyBD.length > 0) return conflictException('Banco já populado');
+  if (verifyBD.length > 80) return conflictException('Banco já populado');
   const request = await api.requestAPI();
   const formated = await formatUniversities(request);
   const result = await model.insertMany(formated);
