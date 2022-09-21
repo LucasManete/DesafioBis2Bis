@@ -16,6 +16,7 @@ const getAll = async (query) => {
     Object.assign(filters, { country });
   }
   const result = await model.paginate(filters, options);
+  if (result.docs.length === 0) return notFoundException('País não econtrado');
 
   return sucessException(result);
 };
@@ -39,7 +40,7 @@ const create = async (body) => {
   return sucessException(result);
 };
 
-const update = async (id, body) => {
+const update = async ({ id }, body) => {
   const university = await model.findByIdAndUpdate(id, body);
   if (!university) {
     return notFoundException('Universidade não econtrada');
@@ -47,7 +48,7 @@ const update = async (id, body) => {
   return sucessException('Dados atualizados com sucesso');
 };
 
-const destroy = async (id) => {
+const destroy = async ({ id }) => {
   const university = await model.findByIdAndDelete(id);
   if (!university) {
     return notFoundException('Universidade não econtrada');
