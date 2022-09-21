@@ -64,7 +64,6 @@ de negócio e a lógica necessária e devolver uma resposta ao controllers.
     
 ## Outros comandos
 
-- `"dev": "nodemon ."` inicia o projeto com nodemon.
 - `"test": "mocha src/test/**/*.test.js --exit"` Executa os testes.
 
 ### Vou ficando por aqui, muito obrigado pela atenção e até breve!
