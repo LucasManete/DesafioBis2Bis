@@ -50,6 +50,14 @@ universityBDRouter.get('/populate', universityController.populate);
  *               schema:
  *                 type: string
  *                 example: Brazil
+ *          - in: query
+ *            name: page
+ *            required: true
+ *            content:
+ *             application/json:
+ *               schema:
+ *                 type: string
+ *                 example: 2
  *        responses:
  *           200:
  *             description: 'Retorna um objeto com 20 universidades do pais filtrado'
