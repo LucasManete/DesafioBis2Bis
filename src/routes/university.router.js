@@ -72,6 +72,7 @@ universityBDRouter.get('/', universityController.getAll);
  *        parameters:
  *          - in: path
  *            name: id
+ *            description: Este é apenas um exmplo de entrada de ID, favor usar o ID gerado pelo post ou buscar na rota /universities (rota getAll)
  *            required: true
  *            content:
  *             application/json:
@@ -112,7 +113,7 @@ universityBDRouter.get('/:id', universityController.getOne);
  *                 type: object
  *               example: { "domains":[ "inun.edu.aras"], "alpha_two_code": "BR", "country": "Brazil", "web_pages": ["http://www.inun.edu.ar/"], "name": "Centro Universitário Barao de Maua", "state_province": "BR"}
  *        responses:
- *           200:
+ *           201:
  *             description: 'Retorna a faculdade cadastrada'
  *             content:
  *              application/json:
@@ -140,6 +141,7 @@ universityBDRouter.post('/', universityController.create);
  *        parameters:
  *          - in: path
  *            name: id
+ *            description: Este é apenas um exmplo de entrada de ID, favor bucar um ID válido usando as outras rotas
  *            required: true
  *            content:
  *             application/json:
@@ -182,6 +184,7 @@ universityBDRouter.put('/:id', universityController.update);
  *        parameters:
  *          - in: path
  *            name: id
+ *            description: Este é apenas um exmplo de entrada de ID, favor bucar um ID válido usando as outras rotas
  *            required: true
  *            content:
  *             application/json:

@@ -1,4 +1,10 @@
-const { notFoundException, conflictException, sucessException } = require('../HttpCatalog/httpCatalog');
+const {
+  notFoundException,
+  conflictException,
+  sucessException,
+  createException,
+} = require('../HttpCatalog/httpCatalog');
+
 const formatUniversities = require('../utils/formatAPI');
 const api = require('../requestApi/request');
 const model = require('../schemas/universitySchema');
@@ -37,7 +43,7 @@ const create = async (body) => {
   if (findUniversity) { return conflictException('Universidade já cadastrada'); }
 
   const result = await model.create(body);
-  return sucessException(result);
+  return createException(result);
 };
 
 const update = async ({ id }, body) => {
