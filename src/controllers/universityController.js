@@ -1,38 +1,44 @@
-const services = require('../services/universityService');
+const service = require('../services/universityService');
+
+const populate = async (_req, res) => {
+  const response = await service.populate();
+
+  return res.status(response.statusCode).json(response);
+};
 
 const getAll = async (req, res) => {
-  const result = await services.getAllUniversity(req.query);
-
-  return res.status(200).json(result);
-};
-
-const getUniversityID = async (req, res) => {
-  const response = await services.getUniversityID(req.params);
+  const response = await service.getAll(req.query);
 
   return res.status(response.statusCode).json(response);
 };
 
-const createUniversity = async (req, res) => {
-  const response = await services.createUniversity(req.body);
+const getOne = async (req, res) => {
+  const response = await service.getOne(req.params);
+  return res.status(response.statusCode).json(response);
+};
+
+const create = async (req, res) => {
+  const response = await service.create(req.body);
 
   return res.status(response.statusCode).json(response);
 };
 
-const updateUniversity = async (req, res) => {
-  const response = await services.updateUniversity(req.params, req.body);
+const update = async (req, res) => {
+  const response = await service.update(req.params, req.body);
 
   return res.status(response.statusCode).json(response);
 };
 
-const deleteUniversity = async (req, res) => {
-  const response = await services.deleteUniversity(req.params);
+const destroy = async (req, res) => {
+  const response = await service.destroy(req.params);
   return res.status(response.statusCode).json(response);
 };
 
 module.exports = {
   getAll,
-  getUniversityID,
-  createUniversity,
-  updateUniversity,
-  deleteUniversity,
+  getOne,
+  create,
+  update,
+  destroy,
+  populate,
 };
