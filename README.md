@@ -66,5 +66,5 @@ de negócio e a lógica necessária e devolver uma resposta ao controllers.
 ## Outros comandos
 
 - `"test": "mocha src/test/**/*.test.js --exit"` Executa os testes.
-
+-  OBS:( Rode o comando de test dentro do container do docker )
 ### Vou ficando por aqui, muito obrigado pela atenção e até breve!
