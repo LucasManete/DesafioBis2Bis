@@ -7,8 +7,8 @@ const service = require('../../../services/universityService');
 const controller = require('../../../controllers/universityController');
 const { MockGetOne, MockCreate } = require('../mockResults');
 
-describe('Testanto camada Controller', async () => {
-  describe('Testando se achou uma universidade', async () => {
+describe('testa controller', () => {
+  it('Testando se achou uma universidade', async () => {
     const res = {};
     const req = {};
     before(() => {
@@ -28,10 +28,8 @@ describe('Testanto camada Controller', async () => {
       expect((res.json).calledWith(MockGetOne)).to.be.true;
     });
   });
-});
 
-describe('Testanto camada Controller', async () => {
-  describe('Testando se achou uma universidade', async () => {
+  it('Testando se achou uma universidade Fail', async () => {
     const res = {};
     const req = {};
     const data = {
@@ -56,10 +54,8 @@ describe('Testanto camada Controller', async () => {
       expect((res.json).calledWith(data)).to.be.true;
     });
   });
-});
 
-describe('Testanto camada Controller', async () => {
-  describe('Testando criar uma universidade', async () => {
+  it('Testando criar uma universidade', async () => {
     const res = {};
     const req = {};
     before(() => {
@@ -79,10 +75,8 @@ describe('Testanto camada Controller', async () => {
       expect((res.json).calledWith(MockCreate)).to.be.true;
     });
   });
-});
 
-describe('Testanto camada Controller', async () => {
-  describe('Testando deletar uma universidade', async () => {
+  it('Testando deletar uma universidade', async () => {
     const res = {};
     const req = {};
     const data = {
@@ -100,17 +94,15 @@ describe('Testanto camada Controller', async () => {
       sinon.restore();
     });
 
-    it('Cria uma universidade', async () => {
+    it('deletar uma universidade', async () => {
       req.params = { id: MockGetOne.message._id };
       await controller.destroy(req, res);
       expect((res.status).calledWith(data.statusCode)).to.be.true;
       expect((res.json).calledWith(data)).to.be.true;
     });
   });
-});
 
-describe('Testanto camada Controller', async () => {
-  describe('Testando atualizar uma universidade', async () => {
+  it('Testando atualizar uma universidade', async () => {
     const res = {};
     const req = {};
     const data = {
@@ -135,38 +127,8 @@ describe('Testanto camada Controller', async () => {
       expect((res.json).calledWith(data)).to.be.true;
     });
   });
-});
 
-describe('Testanto camada Controller', async () => {
-  describe('Testando atualizar uma universidade', async () => {
-    const res = {};
-    const req = {};
-    const data = {
-      statusCode: 200,
-      message: 'Dados atualizados com sucesso',
-      error: false,
-    };
-    before(() => {
-      sinon.stub(service, 'update').resolves(data);
-      res.status = sinon.stub().returns(res);
-      res.json = sinon.stub().returns(res);
-    });
-
-    after(() => {
-      sinon.restore();
-    });
-
-    it('atualizar uma universidade', async () => {
-      req.params = { id: MockGetOne.message._id };
-      await controller.update(req, res);
-      expect((res.status).calledWith(data.statusCode)).to.be.true;
-      expect((res.json).calledWith(data)).to.be.true;
-    });
-  });
-});
-
-describe('Testanto camada Controller', async () => {
-  describe('Testando atualizar uma universidade', async () => {
+  it('Testando popular o banco', async () => {
     const res = {};
     const req = {};
     const data = {
