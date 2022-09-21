@@ -7,8 +7,8 @@ const service = require('../../../services/universityService');
 const controller = require('../../../controllers/universityController');
 const { MockGetOne, MockCreate } = require('../mockResults');
 
-describe('testa controller', () => {
-  it('Testando se achou uma universidade', async () => {
+describe('test controller', () => {
+  it('test find a university', async () => {
     const res = {};
     const req = {};
     before(() => {
@@ -21,7 +21,7 @@ describe('testa controller', () => {
       sinon.restore();
     });
 
-    it('retorna uma universidade', async () => {
+    it('Sucess', async () => {
       req.params = { id: MockGetOne.message._id };
       await controller.getOne(req, res);
       expect((res.status).calledWith(200)).to.be.true;
@@ -29,7 +29,7 @@ describe('testa controller', () => {
     });
   });
 
-  it('Testando se achou uma universidade Fail', async () => {
+  it('test find a university Fail', async () => {
     const res = {};
     const req = {};
     const data = {
@@ -47,7 +47,7 @@ describe('testa controller', () => {
       sinon.restore();
     });
 
-    it('retorna uma universidade', async () => {
+    it('notFound', async () => {
       req.params = { id: '6329fd3c2c9153770c2adaaa' };
       await controller.getOne(req, res);
       expect((res.status).calledWith(404)).to.be.true;
@@ -55,7 +55,7 @@ describe('testa controller', () => {
     });
   });
 
-  it('Testando criar uma universidade', async () => {
+  it('test create a university', async () => {
     const res = {};
     const req = {};
     before(() => {
@@ -68,7 +68,7 @@ describe('testa controller', () => {
       sinon.restore();
     });
 
-    it('Cria uma universidade', async () => {
+    it('sucess', async () => {
       req.body = MockCreate;
       await controller.create(req, res);
       expect((res.status).calledWith(200)).to.be.true;
@@ -76,7 +76,7 @@ describe('testa controller', () => {
     });
   });
 
-  it('Testando deletar uma universidade', async () => {
+  it('test delete a university', async () => {
     const res = {};
     const req = {};
     const data = {
@@ -94,7 +94,7 @@ describe('testa controller', () => {
       sinon.restore();
     });
 
-    it('deletar uma universidade', async () => {
+    it('sucess', async () => {
       req.params = { id: MockGetOne.message._id };
       await controller.destroy(req, res);
       expect((res.status).calledWith(data.statusCode)).to.be.true;
@@ -102,7 +102,7 @@ describe('testa controller', () => {
     });
   });
 
-  it('Testando atualizar uma universidade', async () => {
+  it('test update a university', async () => {
     const res = {};
     const req = {};
     const data = {
@@ -120,7 +120,7 @@ describe('testa controller', () => {
       sinon.restore();
     });
 
-    it('atualizar uma universidade', async () => {
+    it('sucess', async () => {
       req.params = { id: MockGetOne.message._id };
       await controller.update(req, res);
       expect((res.status).calledWith(data.statusCode)).to.be.true;
@@ -128,7 +128,7 @@ describe('testa controller', () => {
     });
   });
 
-  it('Testando popular o banco', async () => {
+  it('test populate BD', async () => {
     const res = {};
     const req = {};
     const data = {
@@ -146,7 +146,7 @@ describe('testa controller', () => {
       sinon.restore();
     });
 
-    it('Popular o Banco', async () => {
+    it('sucess', async () => {
       await controller.populate(req, res);
       expect((res.status).calledWith(data.statusCode)).to.be.true;
       expect((res.json).calledWith(data)).to.be.true;
