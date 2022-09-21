@@ -48,6 +48,10 @@ de negócio e a lógica necessária e devolver uma resposta ao controllers.
     - chai
     - sinon
 
+## Para rodar o projeto é necessário ter o docker e o docker-compose instalado em sua maquina.
+    Instalação do Docker: https://docs.docker.com/engine/install/ubuntu/ 
+    Instalação do Docker-compose: https://docs.docker.com/compose/install/linux/
+    
 ## Começando
 
 - 1. Rode o comando **docker-compose up -d**
