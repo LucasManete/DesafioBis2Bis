@@ -53,6 +53,11 @@ de negócio e a lógica necessária e devolver uma resposta ao controllers.
 - 1. Rode o comando **docker-compose up -d**
 - 2. Rode o comando **docker exec -it university bash**
 - 3. Rode o comando **npm install**
+
+## Entre na rota do Swagger para visualizar as rotas da aplicação e também poder testar.
+
+    **http://localhost:3001/docs**
+    
 ## Outros comandos
 
 - `"dev": "nodemon ."` inicia o projeto com nodemon.
