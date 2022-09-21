@@ -60,7 +60,7 @@ de negócio e a lógica necessária e devolver uma resposta ao controllers.
 
 ## Entre na rota do Swagger para visualizar as rotas da aplicação e também poder testar.
 
-    **http://localhost:3001/docs**
+    http://localhost:3001/docs
     
 ## Outros comandos
 
